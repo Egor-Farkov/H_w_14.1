@@ -3,7 +3,7 @@ from src.product import Product
 
 
 def test_prod(fixture_product: Product, fixture_category: Category) -> None:
-    """Тест"""
+    """Тест."""
     fixture_category.products = [fixture_product]
     assert fixture_category.name == "Смартфоны"
     assert fixture_category.description == "Смартфоны, как средство связи"

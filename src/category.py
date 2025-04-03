@@ -2,7 +2,7 @@ from src.product import Product
 
 
 class Category:
-    """Класс по описанию категорий"""
+    """Класс по описанию категорий."""
 
     name: str
     description: str
@@ -14,7 +14,7 @@ class Category:
     product_count = 0
 
     def __init__(self, name: str, description: str, products: list[Product]):
-        """Метод для инициализации экземпляра класса"""
+        """Метод для инициализации экземпляра класса."""
 
         self.name = name
         self.description = description

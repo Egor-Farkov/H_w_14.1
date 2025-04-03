@@ -6,7 +6,7 @@ from src.product import Product
 
 @pytest.fixture
 def fixture_product() -> Product:
-    """Фикстура продукт"""
+    """Фикстура продукт."""
     return Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
 
 

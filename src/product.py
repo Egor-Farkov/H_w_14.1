@@ -1,5 +1,5 @@
 class Product:
-    """Создан клас продуктов"""
+    """Создан клас продуктов."""
 
     name: str
     description: str
@@ -7,7 +7,7 @@ class Product:
     quantity: int
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
-        """Метод для инициализации экземпляра класса"""
+        """Метод для инициализации экземпляра класса."""
 
         self.name = name
         self.description = description

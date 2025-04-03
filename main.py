@@ -55,6 +55,7 @@ data_list = read_json_file()
 
 category_list = []
 
+# Цикл
 for data in data_list:
     category_name = data["name"]
     category_description = data["description"]
