@@ -14,6 +14,27 @@
 ### В репозитории есть отчет о покрытии тестами.
 ### Покрытие функционального кода тестами — более 75%.
 
-# Дополнительное задание
+# Дополнительное задание:
 
 ### Реализована подгрузка данных по категориям и товарам из файла JSON. Описана специальная функция, которая читает файл и создает объекты классов.
+
+### Установка Poetry
+Если у вас еще не установлен Poetry, выполните следующую команду указанную на официальном сайте
+[Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer)
+
+После установки добавьте [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) в PATH, если это не произошло автоматически:
+
+```export PATH="$HOME/.local/bin:$PATH"```
+
+### Установка зависимостей
+Используйте [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) для создания виртуального окружения и установки 
+зависимостей (включая инструменты для разработки, 
+такие как flake8, isort, black и mypy):
+
+poetry install
+
+### Активация виртуального окружения
+**Активируйте виртуальное окружение [Poetry](https://python-poetry.org/docs/#installing-with-the-official-installer) в зависимости от версии**
+
+# Лицензия
+MIT

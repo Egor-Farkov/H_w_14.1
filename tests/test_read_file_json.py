@@ -2,7 +2,7 @@ from src.read_file_json import read_json_file
 
 
 def test_read_json_file() -> None:
-    """Тест чтения файла json"""
+    """Тест чтения файла json."""
     data = read_json_file()
     assert data == [
         {
