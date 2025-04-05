@@ -13,6 +13,5 @@ def fixture_product() -> Product:
 @pytest.fixture
 def fixture_category() -> Category:
     """Фикстура категории"""
-    product_1 = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
-    product_2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
-    return Category("Смартфоны", "Смартфоны, как средство связи", [product_1, product_2])
+
+    return Category("Смартфоны", "Смартфоны, как средство связи")
