@@ -13,12 +13,12 @@ class Category:
     # Переменная на уровне класса по подсчету количества товаров
     product_count = 0
 
-    def __init__(self, name: str, description: str):
+    def __init__(self, name: str, description: str, products: list[Product]):
         """Метод для инициализации экземпляра класса."""
 
         self.name = name
         self.description = description
-
+        self.__products = products
         self.category_count += 1
 
     @classmethod
@@ -39,9 +39,13 @@ class Category:
         cls.__products.append(product)
 
     @property
-    def products(self) -> str:
+    def products(self) -> list:
         """Геттер"""
         list_products = []
-        for product in self.__products:
+        for product in Category.__products:
             list_products.append(f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт.")
-        return "\n".join(list_products)
+        return list_products
+
+    def __str__(self) -> str:
+        """Возвращает строку: название категории, количество продуктов: X шт."""
+        return f"{self.name}, количество продуктов: {self.product_count} шт."

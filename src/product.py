@@ -34,3 +34,11 @@ class Product:
             print("Цена не должна быть нулевая или отрицательная")
         else:
             self.__price = set_price
+
+    def __str__(self) -> str:
+        """Возвращает строку: Название продукта, X руб. Остаток: X шт."""
+        return f"{self.name}, {self.__price} руб. Остаток: {self.quantity} шт."
+
+    def __add__(self, other: Any) -> Any:
+        """Возвращает сумму произведений цены на количество у двух объектов."""
+        return self.__price * self.quantity + other.__price * other.quantity
