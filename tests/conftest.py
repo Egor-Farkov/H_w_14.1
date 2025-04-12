@@ -14,4 +14,4 @@ def fixture_product() -> Product:
 def fixture_category() -> Category:
     """Фикстура категории"""
 
-    return Category("Смартфоны", "Смартфоны, как средство связи")
+    return Category("Смартфоны", "Смартфоны, как средство связи", [])
