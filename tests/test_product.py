@@ -1,7 +1,8 @@
+import pytest
 from _pytest.capture import CaptureFixture
 
 from src.category import Category
-from src.product import Product
+from src.product import LawnGrass, Product, Smartphone
 
 
 def test_prod(fixture_product: Product) -> None:
@@ -38,3 +39,10 @@ def test_str_category() -> None:
     assert str(cls_cat) == "Смартфоны, количество продуктов: 420 шт."
     assert str(cls_prod) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
     assert cls_prod + cls_prod == 1800000.0
+
+
+def test_add_prod(fixture_smartphone: Smartphone, fixture_lawn_grass: LawnGrass, fixture_category: Category) -> None:
+    with pytest.raises(TypeError):
+        fixture_smartphone + fixture_lawn_grass
+    with pytest.raises(TypeError):
+        fixture_category.add_product("Not a product")
