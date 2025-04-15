@@ -1,3 +1,5 @@
+from typing import Any
+
 from src.product import Product
 
 
@@ -22,8 +24,11 @@ class Category:
         self.category_count += 1
 
     @classmethod
-    def add_product(cls, product: Product) -> None:
+    def add_product(cls, product: Any) -> None:
         """Класс-метод для добавления продуктов"""
+        if not issubclass(product.__class__, Product):
+            raise TypeError("Складывать можно только объекты Product и дочерние от них.")
+
         for item in cls.__products:
             if item.name == product.name:
                 item.quantity += product.quantity

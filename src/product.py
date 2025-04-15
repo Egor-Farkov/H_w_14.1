@@ -41,4 +41,50 @@ class Product:
 
     def __add__(self, other: Any) -> Any:
         """Возвращает сумму произведений цены на количество у двух объектов."""
-        return self.__price * self.quantity + other.__price * other.quantity
+        if type(self) == type(other):
+            return self.__price * self.quantity + other.__price * other.quantity
+        raise TypeError("Ошибка сложения классов")
+
+
+class Smartphone(Product):
+    """Подкласс смартфон"""
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        efficiency: float,
+        model: str,
+        memory: int,
+        color: str,
+    ):
+        """Метод для инициализации экземпляра подкласса."""
+
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+
+class LawnGrass(Product):
+    """Подкласс трава зеленая"""
+
+    def __init__(
+        self,
+        name: str,
+        description: str,
+        price: float,
+        quantity: int,
+        country: str,
+        germination_period: str,
+        color: str,
+    ):
+        """Метод для инициализации экземпляра подкласса."""
+
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
