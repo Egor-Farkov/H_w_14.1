@@ -1,9 +1,27 @@
+from abc import ABC, abstractmethod
 from typing import Any
 
 
-class Product:
+class BaseProduct(ABC):
+    """Абстрактный класс"""
+
+    @abstractmethod
+    def new_product(self, dict_attr: dict) -> Any:
+        pass
+
+
+class ProductMixin:
+    """Класс миксин, распечатывает в консоль параметры объекта и имя класса."""
+
+    def __init__(self, name: str, description: str, price: float, quantity: int):
+        init_name = self.__class__.__name__
+        print(f"{init_name}({name}, {description}, {price}, {quantity})")
+
+
+class Product(BaseProduct, ProductMixin):
     """Создан клас продуктов."""
 
+    __slots__ = ("name", "description", "__price", "quantity")
     name: str
     description: str
     __price: float
@@ -11,7 +29,7 @@ class Product:
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
         """Метод для инициализации экземпляра класса."""
-
+        ProductMixin.__init__(self, name, description, price, quantity)
         self.name = name
         self.description = description
         self.__price = price
@@ -20,7 +38,7 @@ class Product:
     @classmethod
     def new_product(cls, dict_attr: dict) -> Any:
         """Класс-метод новых продуктов"""
-        return Product(**dict_attr)
+        return cls(**dict_attr)
 
     @property
     def price(self) -> float:
@@ -49,6 +67,8 @@ class Product:
 class Smartphone(Product):
     """Подкласс смартфон"""
 
+    __slots__ = ("efficiency", "model", "memory", "color")
+
     def __init__(
         self,
         name: str,
@@ -71,6 +91,8 @@ class Smartphone(Product):
 
 class LawnGrass(Product):
     """Подкласс трава зеленая"""
+
+    __slots__ = ("country", "germination_period", "color")
 
     def __init__(
         self,

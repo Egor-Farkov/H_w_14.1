@@ -3,7 +3,7 @@ from unittest.mock import patch
 from _pytest.capture import CaptureFixture
 
 from src.category import Category
-from src.product import Product
+from src.product import Product, Smartphone
 
 
 def test_prod(fixture_product: Product, fixture_category: Category) -> None:
@@ -31,7 +31,7 @@ def test_low_price(capsys: CaptureFixture[str], fixture_product: Product, fixtur
         fixture_product.price = 10
         fixture_category.add_product(fixture_product)
         read_out = capsys.readouterr()
-        assert read_out.out == ""
+        assert read_out.out == ("Product(Samsung Galaxy C23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, " "5)\n")
 
     with patch("builtins.input", lambda _: "n"):
         fixture_category.add_product(fixture_product)
@@ -41,11 +41,18 @@ def test_low_price(capsys: CaptureFixture[str], fixture_product: Product, fixtur
         assert read_out.out == ""
 
 
-def test_up_price(capsys: CaptureFixture[str], fixture_product: Product, fixture_category: Category) -> None:
+def test_up_price(
+    capsys: CaptureFixture[str], fixture_product: Product, fixture_category: Category, fixture_smartphone: Smartphone
+) -> None:
     """Тест"""
     with patch("builtins.input", lambda _: "y"):
         fixture_category.add_product(fixture_product)
         fixture_product.price = 1000000
         fixture_category.add_product(fixture_product)
         read_out = capsys.readouterr()
-        assert read_out.out == ""
+        assert read_out.out == (
+            "Product(Samsung Galaxy C23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, "
+            "5)\n"
+            "Smartphone(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, "
+            "180000.0, 5)\n"
+        )

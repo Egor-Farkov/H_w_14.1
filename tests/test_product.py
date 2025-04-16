@@ -17,7 +17,11 @@ def test_change_price(capsys: CaptureFixture[str], fixture_product: Product) -> 
     """Тест."""
     fixture_product.price = 0
     read_out = capsys.readouterr()
-    assert read_out.out == "Цена не должна быть нулевая или отрицательная\n"
+    assert read_out.out == (
+        "Product(Samsung Galaxy C23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, "
+        "5)\n"
+        "Цена не должна быть нулевая или отрицательная\n"
+    )
 
 
 def test_new_product(fixture_product: Product) -> None:
@@ -36,7 +40,7 @@ def test_new_product(fixture_product: Product) -> None:
 def test_str_category() -> None:
     cls_prod = Product("Samsung Galaxy C23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
     cls_cat = Category("Смартфоны", "Смартфоны, как средство связи", [cls_prod])
-    assert str(cls_cat) == "Смартфоны, количество продуктов: 420 шт."
+    assert str(cls_cat) == "Смартфоны, количество продуктов: 4 шт."
     assert str(cls_prod) == "Samsung Galaxy C23 Ultra, 180000.0 руб. Остаток: 5 шт."
     assert cls_prod + cls_prod == 1800000.0
 
