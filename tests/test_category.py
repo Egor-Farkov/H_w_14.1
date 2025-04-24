@@ -49,3 +49,7 @@ def test_up_price(capsys: CaptureFixture[str], fixture_product: Product, fixture
         fixture_category.add_product(fixture_product)
         read_out = capsys.readouterr()
         assert read_out.out == ""
+
+
+def test_quantity_zero(fixture_category: Category) -> None:
+    assert fixture_category.middle_price() == 0
