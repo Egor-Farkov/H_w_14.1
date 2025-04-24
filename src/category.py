@@ -5,17 +5,19 @@ from src.product import Product
 
 
 class BaseCategory(ABC):
-    """Абстрактный класс"""
+    """
+    Абстрактный класс с перечислением методов для класса Category и его дочерних классов
+    """
 
     @abstractmethod
-    def add_product(self, product: Any) -> None:
-        pass
+    def add_product(self, product: Any) -> Any: ...
+
+    @abstractmethod
+    def middle_price(self) -> Any: ...
 
 
 class Category(BaseCategory):
     """Класс по описанию категорий."""
-
-    __slots__ = ("name", "description", "__products")
 
     name: str
     description: str
@@ -31,8 +33,8 @@ class Category(BaseCategory):
         self.name = name
         self.description = description
         self.__products = products
-        Category.category_count += 1
-        Category.product_count += len(products)
+        self.category_count += 1
+        self.product_count += len(products)
 
     def add_product(self, product: Any) -> None:
         """Класс-метод для добавления продуктов"""
@@ -64,3 +66,12 @@ class Category(BaseCategory):
     def __str__(self) -> str:
         """Возвращает строку: название категории, количество продуктов: X шт."""
         return f"{self.name}, количество продуктов: {self.product_count} шт."
+
+    def middle_price(self) -> float:
+        """Метод расчета средней цены"""
+        sum_item = sum(cost.price for cost in self.__products)
+        try:
+            return sum_item / len(self.__products)
+
+        except ZeroDivisionError:
+            return 0
