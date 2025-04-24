@@ -2,26 +2,28 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 
-class BaseProduct(ABC):
-    """Абстрактный класс"""
-
-    @abstractmethod
-    def new_product(self, dict_attr: dict) -> Any:
-        pass
-
-
-class ProductMixin:
-    """Класс миксин, распечатывает в консоль параметры объекта и имя класса."""
+class MixinLog:
+    """
+    Миксин класс который при инициализации показывает в консоль имя класса и его аттрибуты
+    """
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
-        init_name = self.__class__.__name__
-        print(f"{init_name}({name}, {description}, {price}, {quantity})")
+        class_name = self.__class__.__name__
+        print(f"Создан объект класса {class_name} с параметрами: {name=} {description=} {price=} {quantity=}")
 
 
-class Product(BaseProduct, ProductMixin):
+class BaseProduct(ABC):
+    """
+    Абстрактный класс указывает на то что абстрактные методы должны реализоваться во всех наследованных классах
+    """
+
+    @abstractmethod
+    def new_product(self, dict_attr: dict) -> Any: ...
+
+
+class Product(BaseProduct, MixinLog):
     """Создан клас продуктов."""
 
-    __slots__ = ("name", "description", "__price", "quantity")
     name: str
     description: str
     __price: float
@@ -29,7 +31,9 @@ class Product(BaseProduct, ProductMixin):
 
     def __init__(self, name: str, description: str, price: float, quantity: int):
         """Метод для инициализации экземпляра класса."""
-        ProductMixin.__init__(self, name, description, price, quantity)
+        if quantity <= 0:
+            raise ValueError("Товар с нулевым количеством не может быть добавлен")
+        MixinLog.__init__(self, name, description, price, quantity)
         self.name = name
         self.description = description
         self.__price = price
@@ -38,7 +42,7 @@ class Product(BaseProduct, ProductMixin):
     @classmethod
     def new_product(cls, dict_attr: dict) -> Any:
         """Класс-метод новых продуктов"""
-        return cls(**dict_attr)
+        return Product(**dict_attr)
 
     @property
     def price(self) -> float:
@@ -67,8 +71,6 @@ class Product(BaseProduct, ProductMixin):
 class Smartphone(Product):
     """Подкласс смартфон"""
 
-    __slots__ = ("efficiency", "model", "memory", "color")
-
     def __init__(
         self,
         name: str,
@@ -91,8 +93,6 @@ class Smartphone(Product):
 
 class LawnGrass(Product):
     """Подкласс трава зеленая"""
-
-    __slots__ = ("country", "germination_period", "color")
 
     def __init__(
         self,
